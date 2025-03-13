@@ -1,25 +1,39 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.io.*;
 
-public class VulnerableApp {
+public class InsecureDeserialization {
     public static void main(String[] args) {
-        String username = "admin";
-        String password = "password123";
-
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "root");
-            Statement stmt = conn.createStatement();
-            // SQL injection vulnerability
-            String query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'";
-            ResultSet rs = stmt.executeQuery(query);
+            // Serialize an object
+            String filename = "testfile.ser";
+            FileOutputStream file = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(new TestClass("test"));
+            out.close();
+            file.close();
 
-            while (rs.next()) {
-                System.out.println("User found: " + rs.getString("username"));
-            }
-        } catch (Exception e) {
+            // Deserialize the object (insecure deserialization)
+            FileInputStream fileIn = new FileInputStream(filename);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            TestClass obj = (TestClass) in.readObject();
+            in.close();
+            fileIn.close();
+
+            System.out.println("Deserialized object: " + obj.getName());
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+}
+
+class TestClass implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private String name;
+
+    public TestClass(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }
