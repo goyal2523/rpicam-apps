@@ -1,0 +1,13 @@
+--- memcpy_usage.c
++++ memcpy_usage.c
+@@ -1,6 +1,6 @@
+ #include <stdio.h>
+ #include <string.h>
+ 
++int main() {
++    char src[10] = "Hello";
++    char dest[5];
++    memcpy(dest, src, sizeof(src));
+     printf("Destination: %s\n", dest);
+     return 0;
+ }

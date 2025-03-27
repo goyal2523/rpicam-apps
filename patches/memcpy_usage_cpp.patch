@@ -1,0 +1,13 @@
+--- memcpy_usage.cpp
++++ memcpy_usage.cpp
+@@ -1,6 +1,6 @@
+ #include <iostream>
+ #include <cstring>
+ 
++int main() {
++    char src[10] = "Hello";
++    char dest[5];
++    memcpy(dest, src, sizeof(src)); // Potential buffer overflow
+     std::cout << "Destination: " << dest << std::endl;
+     return 0;
+ }

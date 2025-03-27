@@ -1,0 +1,12 @@
+--- unsafe_api.c
++++ unsafe_api.c
+@@ -1,6 +1,6 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
++int main() {
++    char buffer[10];
++    gets(buffer); // Unsafe API usage
+     printf("Buffer: %s\n", buffer);
+     return 0;
+ }
