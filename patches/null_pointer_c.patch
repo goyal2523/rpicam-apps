@@ -1,0 +1,10 @@
+--- null_pointer.c
++++ null_pointer.c
+@@ -1,6 +1,6 @@
+ #include <stdio.h>
+ 
++int main() {
++    int *ptr = NULL;
++    *ptr = 10;
+     }
+     return 0;

@@ -1,0 +1,10 @@
+--- null_pointer.cpp
++++ null_pointer.cpp
+@@ -1,6 +1,6 @@
+ #include <iostream>
+ 
++int main() {
++    int *ptr = NULL;
++    *ptr = 10;
+     }
+     return 0;

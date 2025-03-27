@@ -1,0 +1,12 @@
+--- unsafe_api.cpp
++++ unsafe_api.cpp
+@@ -1,6 +1,6 @@
+ #include <iostream>
+ #include <cstdio>
+ 
++int main() {
++    char buffer[10];
++    gets(buffer); // Unsafe API usage
+     std::cout << "Buffer: " << buffer << std::endl;
+     return 0;
+ }
